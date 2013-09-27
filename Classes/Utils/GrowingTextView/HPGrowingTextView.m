@@ -40,7 +40,7 @@
 
 @synthesize font;
 @synthesize textColor;
-@synthesize textAlignment; 
+@synthesize textAlignment;
 @synthesize selectedRange;
 @synthesize editable;
 @synthesize dataDetectorTypes; 
@@ -377,12 +377,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
--(void)setTextAlignment:(UITextAlignment)aligment
+-(void)setTextAlignment:(NSTextAlignment)aligment
 {
 	internalTextView.textAlignment = aligment;
 }
 
--(UITextAlignment)textAlignment
+-(NSTextAlignment)textAlignment
 {
 	return internalTextView.textAlignment;
 }

@@ -21,13 +21,13 @@
 #import "FirstLoginViewController.h"
 #import "LinphoneManager.h"
 #import "PhoneMainView.h"
+#import "Constants.h"
 
 @implementation FirstLoginViewController
 
 @synthesize loginButton;
 @synthesize siteButton;
-@synthesize usernameField;
-@synthesize passwordField;
+@synthesize phoneNumber,countryCode,button0,button1,button2,button3,button4,button5,button6,button7,button8,button9,buttonDel,buttonStar;
 @synthesize waitView;
 
 #pragma mark - Lifecycle Functions
@@ -39,8 +39,8 @@
 - (void)dealloc {
 	[loginButton release];
 	[siteButton release];
-	[usernameField release];
-    [passwordField release];
+	[self.phoneNumber release];
+    [self.countryCode release];
 	[waitView release];
     
     // Remove all observer
@@ -80,8 +80,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                                                object:nil];
     
 	
-	[usernameField setText:[[LinphoneManager instance] lpConfigStringForKey:@"wizard_username"]];
-	[passwordField setText:[[LinphoneManager instance] lpConfigStringForKey:@"wizard_password"]];
+	[self.phoneNumber setText:@""];
+	[self.countryCode setText:@"+1"];
     
     // Update on show
     const MSList* list = linphone_core_get_proxy_config_list([LinphoneManager getLc]);
@@ -110,6 +110,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 		siteUrl=@"http://www.linphone.org";
 	}
 	[siteButton setTitle:siteUrl forState:UIControlStateNormal];
+    
 }
 
 #pragma mark - Event Functions
@@ -159,12 +160,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 }
 
 - (void)onLoginClick:(id)sender {
+  
 	NSString* errorMessage=nil;
-	if ([usernameField.text length]==0 ) {
-		errorMessage=NSLocalizedString(@"Enter your username",nil);
-	}  else if ([passwordField.text length]==0 ) {
-		errorMessage=NSLocalizedString(@"Enter your password",nil);
-	} 
+	if ([phoneNumber.text length]==0 ) {
+		errorMessage=NSLocalizedString(@"Enter your phonenumber",nil);
+	}
 
 	if (errorMessage != nil) {
 		UIAlertView* error=nil;
@@ -179,21 +179,207 @@ static UICompositeViewDescription *compositeDescription = nil;
 		linphone_core_clear_all_auth_info([LinphoneManager getLc]);
 		linphone_core_clear_proxy_config([LinphoneManager getLc]);
 		LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config([LinphoneManager getLc]);
-		/*default domain is supposed to be preset from linphonerc*/
-		NSString* identity = [NSString stringWithFormat:@"sip:%@@%s",usernameField.text, linphone_proxy_config_get_addr(proxyCfg)];
+        
+		//default domain is supposed to be preset from linphonerc
+        
+		NSString* identity = [NSString stringWithFormat:@"sip:%@@%s",phoneNumber.text, linphone_proxy_config_get_addr(proxyCfg)];
 		linphone_proxy_config_set_identity(proxyCfg,[identity UTF8String]);
-		LinphoneAuthInfo* auth_info =linphone_auth_info_new([usernameField.text UTF8String]
-															,[usernameField.text UTF8String]
-															,[passwordField.text UTF8String]
+		LinphoneAuthInfo* auth_info =linphone_auth_info_new([phoneNumber.text UTF8String]
+															,[phoneNumber.text UTF8String]
+															,[PASS_WORD UTF8String]
 															,NULL
 															,NULL);
+         
 		linphone_core_add_auth_info([LinphoneManager getLc], auth_info);
 		linphone_core_add_proxy_config([LinphoneManager getLc], proxyCfg);
 		linphone_core_set_default_proxy([LinphoneManager getLc], proxyCfg);
 		[self.waitView setHidden:false];
-	};
+        [self addProxyConfig:phoneNumber.text password:PASS_WORD domain:PROXY_SERVER server:nil];
+        
+        [[PhoneMainView instance] changeCurrentView:[DialerViewController compositeViewDescription]];
+  	};
+   
 }
 
+-(IBAction)btnPhoneClick:(id)sender{
+    NSString *num = phoneNumber.text;
+    if ([sender tag] == 0) {
+        num = [num stringByAppendingString:@"0"];
+    }
+    if ([sender tag] == 1) {
+        num = [num stringByAppendingString:@"1"];
+    }
+    if ([sender tag] == 2) {
+        num = [num stringByAppendingString:@"2"];
+    }
+    if ([sender tag] == 3) {
+        num = [num stringByAppendingString:@"3"];
+    }
+    if ([sender tag] == 4) {
+        num = [num stringByAppendingString:@"4"];
+    }
+    if ([sender tag] == 5) {
+        num = [num stringByAppendingString:@"5"];
+    }
+    if ([sender tag] == 6) {
+        num = [num stringByAppendingString:@"6"];
+    }
+    if ([sender tag] == 7) {
+        num = [num stringByAppendingString:@"7"];
+    }
+    if ([sender tag] == 8) {
+        num = [num stringByAppendingString:@"8"];
+    }
+    if ([sender tag] == 9) {
+        num = [num stringByAppendingString:@"9"];
+    }
+    if ([sender tag] == 11) {
+        num = [num stringByAppendingString:@"*"];
+    }
+    if ([sender tag] == 12) {
+        num = [num substringToIndex:(num.length - 1)];
+    }
+    phoneNumber.text = num;
+}
+
+-(BOOL) textFieldShouldBeginEditing:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+//main function
+- (void)setDefaultSettings:(LinphoneProxyConfig*)proxyCfg {
+    BOOL pushnotification = [[LinphoneManager instance] lpConfigBoolForKey:@"push_notification" forSection:@"wizard"];
+    [[LinphoneManager instance] lpConfigSetBool:pushnotification forKey:@"pushnotification_preference"];
+    if(pushnotification) {
+        [[LinphoneManager instance] addPushTokenToProxyConfig:proxyCfg];
+    }
+    int expires = [[LinphoneManager instance] lpConfigIntForKey:@"expires" forSection:@"wizard"];
+    linphone_proxy_config_expires(proxyCfg, expires);
+    
+    NSString* transport = [[LinphoneManager instance] lpConfigStringForKey:@"transport" forSection:@"wizard"];
+    LinphoneCore *lc = [LinphoneManager getLc];
+    LCSipTransports transportValue={0};
+	if (transport!=nil) {
+		if (linphone_core_get_sip_transports(lc, &transportValue)) {
+			[LinphoneLogger logc:LinphoneLoggerError format:"cannot get current transport"];
+		}
+		// Only one port can be set at one time, the others's value is 0
+		if ([transport isEqualToString:@"tcp"]) {
+			transportValue.tcp_port=transportValue.tcp_port|transportValue.udp_port|transportValue.tls_port;
+			transportValue.udp_port=0;
+            transportValue.tls_port=0;
+		} else if ([transport isEqualToString:@"udp"]){
+			transportValue.udp_port=transportValue.tcp_port|transportValue.udp_port|transportValue.tls_port;
+			transportValue.tcp_port=0;
+            transportValue.tls_port=0;
+		} else if ([transport isEqualToString:@"tls"]){
+			transportValue.tls_port=transportValue.tcp_port|transportValue.udp_port|transportValue.tls_port;
+			transportValue.tcp_port=0;
+            transportValue.udp_port=0;
+		} else {
+			[LinphoneLogger logc:LinphoneLoggerError format:"unexpected transport [%s]",[transport cStringUsingEncoding:[NSString defaultCStringEncoding]]];
+		}
+		if (linphone_core_set_sip_transports(lc, &transportValue)) {
+			[LinphoneLogger logc:LinphoneLoggerError format:"cannot set transport"];
+		}
+	}
+    
+    NSString* sharing_server = [[LinphoneManager instance] lpConfigStringForKey:@"sharing_server" forSection:@"wizard"];
+    [[LinphoneManager instance] lpConfigSetString:sharing_server forKey:@"sharing_server_preference"];
+    
+    BOOL ice = [[LinphoneManager instance] lpConfigBoolForKey:@"ice" forSection:@"wizard"];
+    [[LinphoneManager instance] lpConfigSetBool:ice forKey:@"ice_preference"];
+    
+    NSString* stun = [[LinphoneManager instance] lpConfigStringForKey:@"stun" forSection:@"wizard"];
+    [[LinphoneManager instance] lpConfigSetString:stun forKey:@"stun_preference"];
+    
+    if ([stun length] > 0){
+        linphone_core_set_stun_server(lc, [stun UTF8String]);
+        if(ice) {
+            linphone_core_set_firewall_policy(lc, LinphonePolicyUseIce);
+        } else {
+            linphone_core_set_firewall_policy(lc, LinphonePolicyUseStun);
+        }
+    } else {
+        linphone_core_set_stun_server(lc, NULL);
+        linphone_core_set_firewall_policy(lc, LinphonePolicyNoFirewall);
+    }
+}
+
+- (void)addProxyConfig:(NSString*)username password:(NSString*)password domain:(NSString*)domain server:(NSString*)server {
+    
+    if(server == nil) {
+        server = domain;
+    }
+	LinphoneProxyConfig* proxyCfg = linphone_core_create_proxy_config([LinphoneManager getLc]);
+    char normalizedUserName[256];
+    [[LinphoneManager instance] lpConfigSetBool:YES forKey:@"ice_preference"];
+    [[LinphoneManager instance] lpConfigSetString:STUN_SERVER forKey:@"stun_preference"];
+    [[LinphoneManager instance] lpConfigSetString:@"tcp" forKey:@"transport_preference"];
+    LinphoneAddress* linphoneAddress = linphone_address_new("sip:user@domain.com");
+    linphone_proxy_config_normalize_number(proxyCfg, [username cStringUsingEncoding:[NSString defaultCStringEncoding]], normalizedUserName, sizeof(normalizedUserName));
+    linphone_address_set_username(linphoneAddress, normalizedUserName);
+    linphone_address_set_domain(linphoneAddress, [domain UTF8String]);
+    const char* identity = linphone_address_as_string_uri_only(linphoneAddress);
+	LinphoneAuthInfo* info = linphone_auth_info_new([username UTF8String], NULL, [password UTF8String], NULL, NULL);
+	linphone_proxy_config_set_identity(proxyCfg, identity);
+	linphone_proxy_config_set_server_addr(proxyCfg, [server UTF8String]);
+    if([server compare:domain options:NSCaseInsensitiveSearch] != 0) {
+        linphone_proxy_config_set_route(proxyCfg, [server UTF8String]);
+    }
+    int defaultExpire = [[LinphoneManager instance] lpConfigIntForKey:@"default_expires"];
+    if (defaultExpire >= 0)
+        linphone_proxy_config_expires(proxyCfg, defaultExpire);
+    if([domain compare:[[LinphoneManager instance] lpConfigStringForKey:@"domain" forSection:@"wizard"] options:NSCaseInsensitiveSearch] == 0) {
+        [self setDefaultSettings:proxyCfg];
+    }
+    linphone_proxy_config_enable_register(proxyCfg, true);
+    linphone_core_add_proxy_config([LinphoneManager getLc], proxyCfg);
+	linphone_core_set_default_proxy([LinphoneManager getLc], proxyCfg);
+	linphone_core_add_auth_info([LinphoneManager getLc], info);
+    LinphoneCore *lc=[LinphoneManager getLc];
+    linphone_core_set_stun_server(lc, [STUN_SERVER UTF8String]);
+    linphone_core_set_firewall_policy(lc, LinphonePolicyUseIce);
+    
+    LCSipTransports transportValue={0};
+    NSString *transport = @"tcp";
+    int port_preference = 5060;
+    
+    
+    //lp_config_set_int(linphone_core_get_config(lc),"sip","sip_random_port", random_port_preference);
+	//lp_config_set_int(linphone_core_get_config(lc),"sip","sip_tcp_random_port", random_port_preference);
+    //lp_config_set_int(linphone_core_get_config(lc),"sip","sip_tls_random_port", random_port_preference);
+    //if(random_port_preference) {
+    port_preference = (0xDFFF&random())+1024;
+    [[LinphoneManager instance] lpConfigSetInt:port_preference forKey:@"port_preference"];
+    //    [self setInteger:port_preference forKey:@"port_preference"]; // Update back preference
+    //}
+	if (transport!=nil) {
+		if (linphone_core_get_sip_transports(lc, &transportValue)) {
+			[LinphoneLogger logc:LinphoneLoggerError format:"cannot get current transport"];
+		}
+		// Only one port can be set at one time, the others's value is 0
+		if ([transport isEqualToString:@"tcp"]) {
+			transportValue.tcp_port=port_preference;
+			transportValue.udp_port=0;
+            transportValue.tls_port=0;
+		} else if ([transport isEqualToString:@"udp"]){
+			transportValue.udp_port=port_preference;
+			transportValue.tcp_port=0;
+            transportValue.tls_port=0;
+		} else if ([transport isEqualToString:@"tls"]){
+			transportValue.tls_port=port_preference;
+			transportValue.tcp_port=0;
+            transportValue.udp_port=0;
+		} else {
+			[LinphoneLogger logc:LinphoneLoggerError format:"unexpected transport [%s]",[transport cStringUsingEncoding:[NSString defaultCStringEncoding]]];
+		}
+		if (linphone_core_set_sip_transports(lc, &transportValue)) {
+			[LinphoneLogger logc:LinphoneLoggerError format:"cannot set transport"];
+		}
+	}
+}
 
 #pragma mark - UITextFieldDelegate Functions
 

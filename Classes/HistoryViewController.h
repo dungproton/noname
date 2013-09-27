@@ -18,10 +18,11 @@
  */              
 
 #import <UIKit/UIKit.h>
-
+#import "UILinphone.h"
 #import "UICompositeViewController.h"
 #import "HistoryTableViewController.h"
 #import "UIToggleButton.h"
+#import "UILinphone.h"
 
 @interface HistoryViewController : UIViewController<UICompositeViewDelegate> {
 }

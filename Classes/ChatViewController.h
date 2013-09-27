@@ -18,7 +18,7 @@
  */ 
 
 #import <UIKit/UIKit.h>
-
+#import "UILinphone.h"
 #import "UIToggleButton.h"
 
 #import "ChatTableViewController.h"

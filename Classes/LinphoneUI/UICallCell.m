@@ -10,7 +10,7 @@
  *  This program is distributed in the hope that it will be useful,     
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of      
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the       
- *  GNU Library General Public License for more details.                
+ *  GNU Library General Public License for more details.
  *                                                                      
  *  You should have received a copy of the GNU General Public License   
  *  along with this program; if not, write to the Free Software         
@@ -35,7 +35,7 @@
         self->minimize = false;
         self->view = UICallCellOtherView_Avatar;
         self->call = acall;
-        image = [[UIImage imageNamed:@"avatar_unknown.png"] retain];
+        //image = [[UIImage imageNamed:@"avatar_unknown.png"] retain];
         address = [@"Unknown" retain];
         [self update];
     }
@@ -151,8 +151,8 @@
             [self addSubview:[[arrayOfViews objectAtIndex:0] retain]];
         }
         // Set selected+over background: IB lack !
-        [pauseButton setImage:[UIImage imageNamed:@"call_state_pause_over.png"] 
-                              forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//        [pauseButton setImage:[UIImage imageNamed:@"call_state_pause_over.png"] 
+//                              forState:(UIControlStateHighlighted | UIControlStateSelected)];
         
         self->currentCall = FALSE;
         
@@ -377,11 +377,11 @@
     LinphoneCallState state = linphone_call_get_state(call);
     if(!conferenceCell) {
         if(state == LinphoneCallOutgoingRinging) {
-            [stateImage setImage:[UIImage imageNamed:@"call_state_ringing_default.png"]];
+            //[stateImage setImage:[UIImage imageNamed:@"call_state_ringing_default.png"]];
             [stateImage setHidden:false];
             [pauseButton setHidden:true];
         } else if(state == LinphoneCallOutgoingInit || state == LinphoneCallOutgoingProgress){
-            [stateImage setImage:[UIImage imageNamed:@"call_state_outgoing_default.png"]];
+            //[stateImage setImage:[UIImage imageNamed:@"call_state_outgoing_default.png"]];
             [stateImage setHidden:false];
             [pauseButton setHidden:true];
         } else {
@@ -554,3 +554,5 @@
 }
 
 @end
+
+

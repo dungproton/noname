@@ -74,6 +74,8 @@
         return;
     }
 	if (addressField && (!dtmf || !linphone_core_in_call([LinphoneManager getLc]))) {
+        if (addressField.text.length == 0)
+            addressField.text = @"";
 		NSString* newAddress = [NSString stringWithFormat:@"%@%c",addressField.text, digit];
 		[addressField setText:newAddress];
 		linphone_core_play_dtmf([LinphoneManager getLc], digit, -1);

@@ -86,7 +86,7 @@
 - (id)init {
     self = [super init];
     if(self != nil) {
-        [self initIASKSpecifierValuesViewControllerEx];
+//        [self initIASKSpecifierValuesViewControllerEx];
     }
     return self;
 }
@@ -94,7 +94,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if(self != nil) {
-        [self initIASKSpecifierValuesViewControllerEx];
+//        [self initIASKSpecifierValuesViewControllerEx];
     }
     return self;
 }
@@ -102,7 +102,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self != nil) {
-        [self initIASKSpecifierValuesViewControllerEx];
+//        [self initIASKSpecifierValuesViewControllerEx];
     }
     return self;
 }
@@ -545,7 +545,8 @@ static UICompositeViewDescription *compositeDescription = nil;
         NSMutableArray *values = [NSMutableArray arrayWithArray:[dict objectForKey:@"Values"]];
         [values removeObject:@"tls"];
         [dict setObject:values forKey:@"Values"];
-        return [[[IASKSpecifier alloc] initWithSpecifier:dict] autorelease];
+        //return [[[IASKSpecifier alloc] initWithSpecifier:dict] autorelease];
+        return nil;
     }
 #else
     if([LinphoneManager isLcReady]) {
@@ -567,7 +568,8 @@ static UICompositeViewDescription *compositeDescription = nil;
                 [values removeObject:@"SRTP"];
                 [dict setObject:values forKey:@"Values"];
             }
-            return [[[IASKSpecifier alloc] initWithSpecifier:dict] autorelease];
+            //return [[[IASKSpecifier alloc] initWithSpecifier:dict] autorelease];
+            return nil;
         }
     }
 #endif //HAVE_SSL

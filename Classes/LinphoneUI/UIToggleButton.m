@@ -27,6 +27,10 @@
 - (void)initUIToggleButton {
     [self update];
 	[self addTarget:self action:@selector(touchUp:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self setTitleColor:LINPHONE_MAIN_COLOR_HILIGHTED forState:UIControlStateHighlighted];
+    
+
 }
 
 - (id)init {
@@ -62,6 +66,8 @@
 
 - (void)touchUp:(id) sender {
 	[self toggle];
+    [self setTitleColor:LINPHONE_MAIN_COLOR_HILIGHTED forState:UIControlStateHighlighted];
+
 }
 
 - (bool)toggle {

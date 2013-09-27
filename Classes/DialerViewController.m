@@ -108,7 +108,7 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(compositeDescription == nil) {
         compositeDescription = [[UICompositeViewDescription alloc] init:@"Dialer" 
                                                                 content:@"DialerViewController" 
-                                                               stateBar:@"UIStateBar" 
+                                                               stateBar:nil
                                                         stateBarEnabled:true 
                                                                  tabBar:@"UIMainBar" 
                                                           tabBarEnabled:true 

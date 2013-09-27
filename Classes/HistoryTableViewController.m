@@ -128,6 +128,11 @@
     [[self tableView] reloadData];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
 }
@@ -142,10 +147,13 @@
     if (cell == nil) {
         cell = [[[UIHistoryCell alloc] initWithIdentifier:kCellId] autorelease];
         // Background View
-        UACellBackgroundView *selectedBackgroundView = [[[UACellBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
-        cell.selectedBackgroundView = selectedBackgroundView;
-        [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
+//        UACellBackgroundView *selectedBackgroundView = [[[UACellBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
+//        cell.selectedBackgroundView = selectedBackgroundView;
+//        [selectedBackgroundView setBackgroundColor:LINPHONE_TABLE_CELL_BACKGROUND_COLOR];
     }
+    
+    [cell setSelected:YES];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     
     LinphoneCallLog *log = [[callLogs objectAtIndex:[indexPath row]] pointerValue];
     [cell setCallLog:log];

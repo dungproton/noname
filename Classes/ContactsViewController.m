@@ -175,17 +175,17 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self changeView:History_All];
     
     // Set selected+over background: IB lack !
-    [linphoneButton setBackgroundImage:[UIImage imageNamed:@"contacts_linphone_selected.png"]
-                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//    [linphoneButton setBackgroundImage:[UIImage imageNamed:@"contacts_linphone_selected.png"]
+//                 forState:(UIControlStateHighlighted | UIControlStateSelected)];
     
-    [linphoneButton setTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]
-					forState:UIControlStateNormal];
+//    [linphoneButton setTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]
+//					forState:UIControlStateNormal];
 	
 	[LinphoneUtils buttonFixStates:linphoneButton];
     
     // Set selected+over background: IB lack !
-    [allButton setBackgroundImage:[UIImage imageNamed:@"contacts_all_selected.png"] 
-                    forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//    [allButton setBackgroundImage:[UIImage imageNamed:@"contacts_all_selected.png"] 
+//                    forState:(UIControlStateHighlighted | UIControlStateSelected)];
     
     [LinphoneUtils buttonFixStates:allButton];
     

@@ -23,7 +23,7 @@
 @interface UIMainBar : TPMultiLayoutViewController {
 }
 
-@property (nonatomic, retain) IBOutlet UIButton* historyButton;
+@property (nonatomic, retain) IBOutlet UIButton* recentsButton;
 @property (nonatomic, retain) IBOutlet UIButton* contactsButton;
 @property (nonatomic, retain) IBOutlet UIButton* dialerButton;
 @property (nonatomic, retain) IBOutlet UIButton* settingsButton;

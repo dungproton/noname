@@ -17,6 +17,12 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifdef __IPHONE_6_0
+# define ALIGN_CENTER NSTextAlignmentCenter
+#else
+# define ALIGN_CENTER UITextAlignmentCenter
+#endif
+
 #import "IncomingCallViewController.h"
 #import "LinphoneManager.h"
 #import "FastAddressBook.h"
@@ -55,6 +61,7 @@
                                              selector:@selector(callUpdateEvent:) 
                                                  name:kLinphoneCallUpdate
                                                object:nil];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -63,6 +70,14 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self 
                                                  name:kLinphoneCallUpdate
                                                object:nil];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [addressLabel setTextColor:[UIColor whiteColor]];
+    [addressLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.addressLabel setTextAlignment:NSTextAlignmentCenter];
 }
 
 
@@ -114,7 +129,11 @@ static UICompositeViewDescription *compositeDescription = nil;
 - (void)update {
     [self view]; //Force view load
     
-    [avatarImage setImage:[UIImage imageNamed:@"avatar_unknown.png"]];
+    //[avatarImage setImage:[UIImage imageNamed:@"avatar_unknown.png"]];
+    
+    //CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+    avatarImage.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    avatarImage.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
     NSString* address = nil;
     const LinphoneAddress* addr = linphone_call_get_remote_address(call);
@@ -154,7 +173,11 @@ static UICompositeViewDescription *compositeDescription = nil;
     if(address == nil) {
         address = @"Unknown";
     }
+
     [addressLabel setText:address];
+    [addressLabel setTextColor:[UIColor whiteColor]];
+    [addressLabel setTextAlignment:NSTextAlignmentCenter];
+    
 }
 
 

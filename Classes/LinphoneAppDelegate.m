@@ -144,11 +144,20 @@
 		[LinphoneLogger log:LinphoneLoggerLog format:@"PushNotification from launch received."];
 		[self processRemoteNotification:remoteNotif];
 	}
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7)
+    {
+        
+        [application setStatusBarStyle:UIStatusBarStyleDefault];
+        
+    }
+
     return YES;
 }
 
 - (void)startApplication {
     // Restart Linphone Core if needed
+    
     if(![LinphoneManager isLcReady]) {
         [[LinphoneManager instance]	startLibLinphone];
     }

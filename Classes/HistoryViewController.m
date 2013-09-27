@@ -122,25 +122,36 @@ static UICompositeViewDescription *compositeDescription = nil;
     [self changeView: History_All];
     
     // Set selected+over background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"history_ok_over.png"]
-                          forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//    [editButton setBackgroundImage:[UIImage imageNamed:@"history_ok_over.png"]
+//                          forState:(UIControlStateHighlighted | UIControlStateSelected)];
     
+    [editButton setTitleColor:LINPHONE_MAIN_COLOR forState:UIControlStateNormal];
+    [editButton setTitleColor:LINPHONE_MAIN_COLOR_HILIGHTED forState:UIControlStateSelected || UIControlStateHighlighted];
+ 
     [LinphoneUtils buttonFixStates:editButton];
     
     // Set selected+over background: IB lack !
-    [allButton setBackgroundImage:[UIImage imageNamed:@"history_all_selected.png"] 
-                    forState:(UIControlStateHighlighted | UIControlStateSelected)];
-    
+//    [allButton setBackgroundImage:[UIImage imageNamed:@"history_all_selected.png"] 
+//                    forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//    
     [LinphoneUtils buttonFixStatesForTabs:allButton];
     
     // Set selected+over background: IB lack !
-    [missedButton setBackgroundImage:[UIImage imageNamed:@"history_missed_selected.png"] 
-               forState:(UIControlStateHighlighted | UIControlStateSelected)];
-    
+//    [missedButton setBackgroundImage:[UIImage imageNamed:@"history_missed_selected.png"] 
+//               forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//    
     [LinphoneUtils buttonFixStatesForTabs:missedButton];
+    
+    [deleteButton setTitleColor:[UIColor colorWithRed:232/256.0f green:130/256.0f blue:2/256.0f alpha:0.3f] forState:UIControlStateHighlighted];
     
     [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
     [tableController.tableView setBackgroundView:nil]; // Can't do it in Xib: issue with ios4
+    
+    // Set color of button Delete
+    [deleteButton setTitleColor:LINPHONE_MAIN_COLOR forState:UIControlStateNormal];
+    [deleteButton setTitleColor:LINPHONE_MAIN_COLOR_HILIGHTED forState:UIControlStateSelected || UIControlStateHighlighted];
+    
+
 }
 
 

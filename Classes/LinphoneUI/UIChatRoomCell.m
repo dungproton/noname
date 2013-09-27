@@ -204,7 +204,7 @@ static UIFont *CELL_FONT = nil;
         }
         messageSize = [[chat message] sizeWithFont: CELL_FONT
                                         constrainedToSize: CGSizeMake(width - CELL_MESSAGE_X_MARGIN, 10000.0f)
-                                            lineBreakMode: UILineBreakModeTailTruncation];
+                                            lineBreakMode: NSLineBreakByTruncatingTail];
     } else {
         messageSize = CGSizeMake(CELL_IMAGE_WIDTH, CELL_IMAGE_HEIGHT);
     }
@@ -240,16 +240,16 @@ static UIFont *CELL_FONT = nil;
         [innerView setFrame:innerFrame];
 
         CGRect messageFrame = [bubbleView frame];
-        messageFrame.origin.y = ([innerView frame].size.height - messageFrame.size.height)/2;
-        if([[chat direction] intValue]) { // Inverted
-            [backgroundImage setImage:[TUNinePatchCache imageOfSize:[backgroundImage bounds].size
-                                                  forNinePatchNamed:@"chat_bubble_incoming"]];
-            messageFrame.origin.y += 5;
-        } else {
-            [backgroundImage setImage:[TUNinePatchCache imageOfSize:[backgroundImage bounds].size
-                                                  forNinePatchNamed:@"chat_bubble_outgoing"]];
-            messageFrame.origin.y -= 5;
-        }
+//        messageFrame.origin.y = ([innerView frame].size.height - messageFrame.size.height)/2;
+//        if([[chat direction] intValue]) { // Inverted
+//            [backgroundImage setImage:[TUNinePatchCache imageOfSize:[backgroundImage bounds].size
+//                                                  forNinePatchNamed:@"chat_view_incoming"]];
+//            messageFrame.origin.y += 0;
+//        } else {
+//            [backgroundImage setImage:[TUNinePatchCache imageOfSize:[backgroundImage bounds].size
+//                                                  forNinePatchNamed:@"chat_view_incoming"]];
+//            messageFrame.origin.y -= 0;
+//        }
         [bubbleView setFrame:messageFrame];
     }
 }

@@ -224,12 +224,12 @@ static void sync_address_book (ABAddressBookRef addressBook, CFDictionaryRef inf
     [super viewDidLoad];
     
     // Set selected+over background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_over.png"]
-                forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//    [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_over.png"]
+//                forState:(UIControlStateHighlighted | UIControlStateSelected)];
     
     // Set selected+disabled background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_disabled.png"]
-                forState:(UIControlStateDisabled | UIControlStateSelected)];
+//    [editButton setBackgroundImage:[UIImage imageNamed:@"contact_ok_disabled.png"]
+//                forState:(UIControlStateDisabled | UIControlStateSelected)];
     
     [LinphoneUtils buttonFixStates:editButton];
 

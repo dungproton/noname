@@ -29,8 +29,24 @@
 
 @property (nonatomic, retain) IBOutlet UIButton* loginButton;
 @property (nonatomic, retain) IBOutlet UIButton* siteButton;
-@property (nonatomic, retain) IBOutlet UITextField* usernameField;
-@property (nonatomic, retain) IBOutlet UITextField* passwordField;
+@property (nonatomic, retain) IBOutlet UITextField* countryCode;
+@property (nonatomic, retain) IBOutlet UITextField* phoneNumber;
 @property (nonatomic, retain) IBOutlet UIView* waitView;
 
+//Button
+@property (nonatomic, retain) IBOutlet UIButton *button1;
+@property (nonatomic, retain) IBOutlet UIButton *button2;
+@property (nonatomic, retain) IBOutlet UIButton *button3;
+@property (nonatomic, retain) IBOutlet UIButton *button4;
+@property (nonatomic, retain) IBOutlet UIButton *button5;
+@property (nonatomic, retain) IBOutlet UIButton *button6;
+@property (nonatomic, retain) IBOutlet UIButton *button7;
+@property (nonatomic, retain) IBOutlet UIButton *button8;
+@property (nonatomic, retain) IBOutlet UIButton *button9;
+@property (nonatomic, retain) IBOutlet UIButton *button0;
+@property (nonatomic, retain) IBOutlet UIButton *buttonDel;
+@property (nonatomic, retain) IBOutlet UIButton *buttonStar;
+
+//Action button
+- (IBAction)btnPhoneClick:(id)sender;
 @end

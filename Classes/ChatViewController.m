@@ -50,8 +50,11 @@
     [super viewDidLoad];
     
     // Set selected+over background: IB lack !
-    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_ok_over.png"]
-                forState:(UIControlStateHighlighted | UIControlStateSelected)];
+//    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_ok_over.png"]
+//                forState:(UIControlStateHighlighted | UIControlStateSelected)];
+    
+    [editButton setTitleColor:LINPHONE_MAIN_COLOR forState:UIControlStateNormal];
+    [editButton setTitleColor:LINPHONE_MAIN_COLOR_HILIGHTED forState:UIControlStateSelected || UIControlStateHighlighted];
     
     [LinphoneUtils buttonFixStates:editButton];
 

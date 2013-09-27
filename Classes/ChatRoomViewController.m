@@ -130,7 +130,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	messageField.font = [UIFont systemFontOfSize:18.0f];
     messageField.contentInset = UIEdgeInsetsMake(0, -5, -2, -5);
     messageField.internalTextView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 10);
-    messageField.backgroundColor = [UIColor clearColor];
+    //messageField.backgroundColor = [UIColor clearColor];
     [sendButton setEnabled:FALSE];
     
     [tableController.tableView addGestureRecognizer:listTapGestureRecognizer];
@@ -173,8 +173,8 @@ static UICompositeViewDescription *compositeDescription = nil;
     [editButton setOff];
     [[tableController tableView] reloadData];
     
-    [messageBackgroundImage setImage:[TUNinePatchCache imageOfSize:[messageBackgroundImage bounds].size
-                                               forNinePatchNamed:@"chat_message_background"]];
+//    [messageBackgroundImage setImage:[TUNinePatchCache imageOfSize:[messageBackgroundImage bounds].size
+//                                               forNinePatchNamed:@"chat_message_background"]];
     
 	BOOL fileSharingEnabled = [[LinphoneManager instance] lpConfigStringForKey:@"sharing_server_preference"] != NULL 
 								&& [[[LinphoneManager instance] lpConfigStringForKey:@"sharing_server_preference"] length]>0;
@@ -218,8 +218,8 @@ static UICompositeViewDescription *compositeDescription = nil;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    [messageBackgroundImage setImage:[TUNinePatchCache imageOfSize:[messageBackgroundImage bounds].size
-                                                 forNinePatchNamed:@"chat_message_background"]];
+//    [messageBackgroundImage setImage:[TUNinePatchCache imageOfSize:[messageBackgroundImage bounds].size
+//                                                 forNinePatchNamed:@"chat_message_background"]];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -498,8 +498,8 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
         tableRect.size.height -= diff;
         [tableController.view setFrame:tableRect];
         
-        [messageBackgroundImage setImage:[TUNinePatchCache imageOfSize:[messageBackgroundImage bounds].size
-                                                     forNinePatchNamed:@"chat_message_background"]];
+//        [messageBackgroundImage setImage:[TUNinePatchCache imageOfSize:[messageBackgroundImage bounds].size
+//                                                     forNinePatchNamed:@"chat_message_background"]];
     }
 }
 

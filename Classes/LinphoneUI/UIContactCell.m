@@ -139,7 +139,18 @@
 
     [firstNameLabel setFrame: firstNameFrame];
     [lastNameLabel setFrame: lastNameFrame];
+    
+    // Set up circle avartar
+    
+    // use the image's layer to mask the image into a circle
+    self.avatarImage.layer.cornerRadius = roundf(self.avatarImage.frame.size.width/2.0);
+    self.avatarImage.layer.masksToBounds = YES;
+    self.avatarImage.layer.shouldRasterize = YES;
+    
+    [self.contentView setOpaque:YES];
+    [self.backgroundView setOpaque:YES];
 }
+
 
 - (void)setHighlighted:(BOOL)highlighted {
     [self setHighlighted:highlighted animated:FALSE];
