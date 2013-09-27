@@ -21,6 +21,8 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>icon-voximax</string>
+				<string>icon-voximax-57</string>
 				<string>linphone_icon_57.png</string>
 				<string>linphone_icon_72.png</string>
 				<string>linphone_icon_57@2x.png</string>
@@ -29,7 +31,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>org.linphone.phone2</string>
+	<string>org.linphone.phone3</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLocalizations</key>
@@ -64,6 +66,10 @@
 	<string>LinphoneApp</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>LinphoneApp</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>MYRIADPRO-REGULAR.OTF</string>
+	</array>
 	<key>UIApplicationExitsOnSuspend</key>
 	<false/>
 	<key>UIBackgroundModes</key>
@@ -71,6 +77,8 @@
 		<string>voip</string>
 		<string>audio</string>
 	</array>
+	<key>UILaunchImageFile</key>
+	<string>linphone_splashscreen</string>
 	<key>UILaunchImageFile~ipad</key>
 	<string>linphone_splashscreen</string>
 	<key>UILaunchImageFile~iphone</key>
@@ -82,14 +90,13 @@
 	</array>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

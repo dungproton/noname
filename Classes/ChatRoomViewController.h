@@ -64,5 +64,5 @@
 - (IBAction)onPictureClick:(id)event;
 - (IBAction)onTransferCancelClick:(id)event;
 - (IBAction)onListTap:(id)sender;
-
+-(IBAction)onCallClick:(id)sender;
 @end

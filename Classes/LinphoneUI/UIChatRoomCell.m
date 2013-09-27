@@ -45,12 +45,17 @@
 
 static const CGFloat CELL_MIN_HEIGHT = 50.0f;
 static const CGFloat CELL_MIN_WIDTH = 150.0f;
+//static const CGFloat CELL_MIN_HEIGHT = 50.0f;
+//static const CGFloat CELL_MIN_WIDTH = 10.0f;
+
 static const CGFloat CELL_MAX_WIDTH = 320.0f;
 static const CGFloat CELL_MESSAGE_X_MARGIN = 26.0f;
 static const CGFloat CELL_MESSAGE_Y_MARGIN = 36.0f;
 static const CGFloat CELL_FONT_SIZE = 17.0f;
 static const CGFloat CELL_IMAGE_HEIGHT = 100.0f;
-static const CGFloat CELL_IMAGE_WIDTH = 100.0f;
+static const CGFloat CELL_IMAGE_WIDTH = 50.0f;
+//static const CGFloat CELL_IMAGE_HEIGHT = 100.0f;
+//static const CGFloat CELL_IMAGE_WIDTH = 10.0f;
 static UIFont *CELL_FONT = nil;
 
 #pragma mark - Lifecycle Functions
@@ -230,26 +235,28 @@ static UIFont *CELL_FONT = nil;
         // Resize inner
         CGRect innerFrame;
         innerFrame.size = [UIChatRoomCell viewSize:chat width:[self frame].size.width];
-        if([[chat direction] intValue]) { // Inverted
-            innerFrame.origin.x = 0.0f;
-            innerFrame.origin.y = 0.0f;
+        if([[chat direction] intValue]) { // Invƒerted
+            innerFrame.origin.x = 2.0f;
+            innerFrame.origin.y = 2.0f;
         } else {
-            innerFrame.origin.x = [self frame].size.width - innerFrame.size.width;
-            innerFrame.origin.y = 0.0f;
+            innerFrame.origin.x = [self frame].size.width+4 - innerFrame.size.width;
+            innerFrame.origin.y = 2.0f;
         }
         [innerView setFrame:innerFrame];
 
         CGRect messageFrame = [bubbleView frame];
-//        messageFrame.origin.y = ([innerView frame].size.height - messageFrame.size.height)/2;
-//        if([[chat direction] intValue]) { // Inverted
-//            [backgroundImage setImage:[TUNinePatchCache imageOfSize:[backgroundImage bounds].size
-//                                                  forNinePatchNamed:@"chat_view_incoming"]];
-//            messageFrame.origin.y += 0;
-//        } else {
-//            [backgroundImage setImage:[TUNinePatchCache imageOfSize:[backgroundImage bounds].size
-//                                                  forNinePatchNamed:@"chat_view_incoming"]];
-//            messageFrame.origin.y -= 0;
-//        }
+        messageFrame.origin.y = ([innerView frame].size.height - messageFrame.size.height)/2;
+        if([[chat direction] intValue]) { // Inverted
+            //[backgroundImage setImage:[TUNinePatchCache imageOfSize:[backgroundImage bounds].size
+            //                                      forNinePatchNamed:@"chat_view_incoming.png"]];
+            [backgroundImage setImage:[UIImage imageNamed:@"chat_view_incoming.png"] ];
+            //messageFrame.origin.y += ;
+        } else {
+            //[backgroundImage setImage:[TUNinePatchCache imageOfSize:[backgroundImage bounds].size
+            //                                      forNinePatchNamed:@"chat_view_outgoing.png"]];
+            [backgroundImage setImage:[UIImage imageNamed:@"chat_view_outgoing.png"] ];
+            //messageFrame.origin.y -= 5;
+        }
         [bubbleView setFrame:messageFrame];
     }
 }

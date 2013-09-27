@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4457.6" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.6"/>
@@ -9,7 +9,7 @@
             <connections>
                 <outlet property="addButton" destination="6" id="91"/>
                 <outlet property="allButton" destination="zf5-ub-wne" id="LFZ-zb-2lI"/>
-                <outlet property="backButton" destination="VKE-3D-JjR" id="gZR-gc-M3A"/>
+                <outlet property="backButton" destination="uzB-pZ-Y1k" id="5au-ho-cZH"/>
                 <outlet property="linphoneButton" destination="QyQ-k3-Ggt" id="BU3-tm-afw"/>
                 <outlet property="tableController" destination="76" id="83"/>
                 <outlet property="tableView" destination="69" id="84"/>
@@ -105,24 +105,21 @@
                                 <action selector="onAddContactClick:" destination="-1" eventType="touchUpInside" id="86"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VKE-3D-JjR">
-                            <rect key="frame" x="0.0" y="0.0" width="64" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uzB-pZ-Y1k">
+                            <rect key="frame" x="0.0" y="0.0" width="73" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" red="0.975308642" green="0.56122495999999999" blue="0.1992824788" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                            <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="-11" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="-1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <color key="tintColor" red="0.975308642" green="0.56122495999999999" blue="0.1992824788" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="Back" image="back.png">
                                 <color key="titleColor" red="0.975308642" green="0.56122495999999999" blue="0.1992824788" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected">
-                                <color key="titleColor" red="0.975308642" green="0.56122495999999999" blue="0.1992824788" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="highlighted" image="back.png">
-                                <color key="titleColor" red="0.975308642" green="0.56122495999999999" blue="0.1992824788" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="B0e-8r-hVb"/>
+                                <action selector="onBackClick:" destination="-1" eventType="touchUpInside" id="9d4-bm-FrG"/>
                             </connections>
                         </button>
                     </subviews>
@@ -159,26 +156,6 @@
         <image name="back.png" width="10" height="16"/>
         <image name="button_add.png" width="19" height="19"/>
         <image name="button_add_clicked.png" width="19" height="19"/>
-        <image name="toolsbar_background.png" width="640.10137939453125" height="88.082939147949219"/>
+        <image name="toolsbar_background.png" width="5" height="88"/>
     </resources>
-    <classes>
-        <class className="ContactsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ContactsTableViewController.h"/>
-        </class>
-        <class className="ContactsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ContactsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onAddContactClick:"/>
-                <relationship kind="action" name="onAllClick:"/>
-                <relationship kind="action" name="onBackClick:"/>
-                <relationship kind="action" name="onLinphoneClick:"/>
-                <relationship kind="outlet" name="addButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="allButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="backButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="linphoneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="tableController" candidateClass="ContactsTableViewController"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
 </document>

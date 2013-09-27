@@ -316,7 +316,7 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
 	ChatRoomViewController* thiz = (ChatRoomViewController*)ud;
 	ChatModel *chat = (ChatModel *)linphone_chat_message_get_user_data(msg); 
 	[LinphoneLogger log:LinphoneLoggerLog 
-				 format:@"Delivery status for [%@] is [%s]",(chat.message?chat.message:@""),linphone_chat_message_state_to_string(state)];
+				 format:@"Delivery status for [%@] is [%s]",(chat.message?chat.message:@""), linphone_chat_message_state_to_string(state)];
 	[chat setState:[NSNumber numberWithInt:state]];
 	[chat update];
 	[thiz.tableController updateChatEntry:chat];
@@ -813,4 +813,28 @@ static void message_status(LinphoneChatMessage* msg,LinphoneChatMessageState sta
     [UIView commitAnimations];
 }
 
+-(IBAction)onCallClick:(id)sender{
+    
+    LinphoneAddress* linphoneAddress = linphone_core_interpret_url([LinphoneManager getLc], [remoteAddress UTF8String]);
+	if (linphoneAddress == NULL) {
+        [[PhoneMainView instance] popCurrentView];
+		UIAlertView* error = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Invalid SIP address",nil)
+														message:NSLocalizedString(@"Either configure a SIP proxy server from settings prior to send a message or use a valid SIP address (I.E sip:john@example.net)",nil)
+													   delegate:nil
+											  cancelButtonTitle:NSLocalizedString(@"Continue",nil)
+											  otherButtonTitles:nil];
+		[error show];
+		[error release];
+        return;
+    }
+	char *tmp = linphone_address_as_string_uri_only(linphoneAddress);
+	NSString *normalizedSipAddress = [NSString stringWithUTF8String:tmp];
+    
+    NSString *displayName = nil;
+    ABRecordRef contact = [[[LinphoneManager instance] fastAddressBook] getContact:normalizedSipAddress];
+    if(contact) {
+        displayName = [FastAddressBook getContactDisplayName:contact];
+    }
+    [[LinphoneManager instance] call:normalizedSipAddress displayName:displayName transfer:FALSE];
+}
 @end

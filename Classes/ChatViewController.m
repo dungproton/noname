@@ -53,9 +53,6 @@
 //    [editButton setBackgroundImage:[UIImage imageNamed:@"chat_ok_over.png"]
 //                forState:(UIControlStateHighlighted | UIControlStateSelected)];
     
-    [editButton setTitleColor:LINPHONE_MAIN_COLOR forState:UIControlStateNormal];
-    [editButton setTitleColor:LINPHONE_MAIN_COLOR_HILIGHTED forState:UIControlStateSelected || UIControlStateHighlighted];
-    
     [LinphoneUtils buttonFixStates:editButton];
 
     [tableController.tableView setBackgroundColor:[UIColor clearColor]]; // Can't do it in Xib: issue with ios4
@@ -116,6 +113,7 @@ static UICompositeViewDescription *compositeDescription = nil;
 	//Push ChatRoom
 	ChatRoomViewController *controller = DYNAMIC_CAST([[PhoneMainView instance] changeCurrentView:[ChatRoomViewController compositeViewDescription] push:TRUE], ChatRoomViewController);
 	if(controller != nil) {
+        NSLog(@"%@",[addressField text]);
 		[controller setRemoteAddress:[addressField text]];
 	}
 	addressField.text = @"";
